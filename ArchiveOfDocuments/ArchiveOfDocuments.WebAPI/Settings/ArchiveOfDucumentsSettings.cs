@@ -7,5 +7,6 @@ namespace ArchiveOfDocuments.WebAPI.Settings
 {
     public class ArchiveOfDucumentsSettings
     {
+        public string ArchiveOfDucumentsDbContextConnectionString { get; set; }
     }
 }
