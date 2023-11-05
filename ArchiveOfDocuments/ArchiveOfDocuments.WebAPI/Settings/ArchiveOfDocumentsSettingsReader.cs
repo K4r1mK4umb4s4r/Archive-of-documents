@@ -7,5 +7,10 @@ namespace ArchiveOfDocuments.WebAPI.Settings
 {
     public class ArchiveOfDocumentsSettingsReader
     {
+         return new ArchiveOfDocumentsSettings()
+             {
+                 ArchiveOfDocumentsDbContextConnectionString = configuration.GetValue<string>("ArchiveOfDocumentsDbContext")
+             };
+
     }
 }
