@@ -1,5 +1,5 @@
-**/bin
-**/logs
-**/obj
-**/.vs
-**/.idea
+/bin
+/logs
+/obj
+/.vs
+/.idea
