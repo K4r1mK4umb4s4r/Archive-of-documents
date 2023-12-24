@@ -1,26 +1,37 @@
-using Microsoft.AspNetCore.Hosting;
+using ArchiveOfDocuments.Service.IoC;
+using ArchiveOfDocuments.WebAPI.loC;
+using ArchiveOfDocuments.WebAPI.Settings;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace ArchiveOfDocuments.WebAPI
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+var configuration = new ConfigurationBuilder()
+.AddJsonFile("appsettings.json", optional: false)
+.Build();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
-}
+var settings = ArchiveOfDocumentsSettingsReader.Read(configuration);
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+
+AuthorizationConfigurator.ConfigureServices(builder.Services, settings);
+DbContextConfigurator.ConfigureService(builder.Services, settings);
+SerilogConfigurator.ConfigureService(builder);
+SwaggerConfigurator.ConfigureServices(builder.Services);
+
+var app = builder.Build();
+
+SerilogConfigurator.ConfigureApplication(app);
+SwaggerConfigurator.ConfigureApplication(app);
+DbContextConfigurator.ConfigureApplication(app);
+AuthorizationConfigurator.ConfigureApplication(app);
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();
+
+public partial class Program { }
