@@ -3,3 +3,11 @@
 /obj
 /.vs
 /.idea
+/ArchiveOfDocuments/.vs/ArchiveOfDocuments
+/ArchiveOfDocuments/ArchiveOfDocument.DataAccess/bin/Debug/net7.0
+/ArchiveOfDocuments/ArchiveOfDocument.DataAccess/obj
+/ArchiveOfDocuments/ArchiveOfDocuments.BL/bin/Debug/net7.0
+/ArchiveOfDocuments/ArchiveOfDocuments.BL/obj
+/ArchiveOfDocuments/ArchiveOfDocuments.UnitTests/obj
+/ArchiveOfDocuments/ArchiveOfDocuments.WebAPI/bin/Debug/net7.0
+/ArchiveOfDocuments/ArchiveOfDocuments.WebAPI/obj
